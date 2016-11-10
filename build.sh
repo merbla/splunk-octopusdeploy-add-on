@@ -4,13 +4,16 @@ prntdash() {
 echo "-----------------------------------------------------------"
 }
 
+# Get a build number from TravisCI
 if [ "$TRAVIS_BUILD_NUMBER" = "" ]
 then
+    # Used for local builds
    export OCTO_BUILD=999
 else
    export OCTO_BUILD=$TRAVIS_BUILD_NUMBER
 fi
 
+# Control the Major/Minor here
 export MAJOR=0 
 export MINOR=0
 export APP_VERSION=$MAJOR.$MINOR.$OCTO_BUILD
@@ -32,9 +35,10 @@ cp -r src/static tmp_build/octpopus_deploy_addon
 
 # Remove any Python Cache
 find tmp_build/octpopus_deploy_addon -name "*.pyc" -delete
-
+prntdash
 # Increment Build Number
 echo "Using version $APP_VERSION"
+prntdash
 bumpversion \
     --current-version 0.0.0 \
     --new-version $APP_VERSION \
