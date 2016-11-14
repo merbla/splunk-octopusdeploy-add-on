@@ -89,5 +89,11 @@ ENV/
 .ropeproject
 
 
-
+#Octo Build
 tmp_build/
+
+# Read the docs
+_build
+_static
+_templates
+
