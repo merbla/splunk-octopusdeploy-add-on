@@ -6,6 +6,6 @@ python:
 install:
   - pip install bumpversion
   - pip install -r src/requirements.txt
- 
- script:
+
+script:
   - ./build.sh
