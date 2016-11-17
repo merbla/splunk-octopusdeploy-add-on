@@ -15,7 +15,7 @@ fi
 
 # Control the Major/Minor here
 export MAJOR=0 
-export MINOR=0
+export MINOR=1
 export APP_VERSION=$MAJOR.$MINOR.$OCTO_BUILD
 
 prntdash

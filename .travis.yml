@@ -1,6 +1,10 @@
 language: python
+sudo: false
 python:
   - "2.7"
+
 install:
-  - pip install --upgrade bumpversion
+  - pip install bumpversion
   - pip install -r src/requirements.txt
+
+script: pytest 
