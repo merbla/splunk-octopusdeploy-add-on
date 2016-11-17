@@ -49,4 +49,3 @@ bumpversion \
 cd tmp_build
 tar -czvf octopusdeploy-addon.tgz octpopus_deploy_addon
 cd ..
-rm -rf tmp_build
