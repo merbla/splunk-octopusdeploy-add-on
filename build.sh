@@ -20,7 +20,6 @@ export APP_VERSION=$MAJOR.$MINOR.$OCTO_BUILD
 
 prntdash
 echo "Build Number: $OCTO_BUILD"
-prntdash
 
 # Create/Clean up folder
 rm -rf tmp_build
@@ -35,7 +34,8 @@ cp -r src/static tmp_build/octpopus_deploy_addon
 
 # Remove any Python Cache
 find tmp_build/octpopus_deploy_addon -name "*.pyc" -delete
-prntdash
+
+
 # Increment Build Number
 echo "Using version $APP_VERSION"
 prntdash
@@ -44,6 +44,8 @@ bumpversion \
     --new-version $APP_VERSION \
     tmp_build/octpopus_deploy_addon/default/app.conf \
     --allow-dirty
+
+
 
 # Package the app
 cd tmp_build
