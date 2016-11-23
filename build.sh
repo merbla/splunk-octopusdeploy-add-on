@@ -35,7 +35,6 @@ cp -r src/static tmp_build/octpopus_deploy_addon
 # Remove any Python Cache
 find tmp_build/octpopus_deploy_addon -name "*.pyc" -delete
 
-
 # Increment Build Number
 echo "Using version $APP_VERSION"
 prntdash
@@ -45,9 +44,12 @@ bumpversion \
     tmp_build/octpopus_deploy_addon/default/app.conf \
     --allow-dirty
 
-
-
 # Package the app
 cd tmp_build
 tar -czvf octopusdeploy-addon.tgz octpopus_deploy_addon
+
+# Run Splunk AppInspect
+splunk-appinspect inspect octopusdeploy-addon.tgz
+
+# Back to the root.
 cd ..
