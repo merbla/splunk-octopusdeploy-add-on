@@ -1,7 +1,8 @@
 #!/bin/bash
+set -e
 
 prntdash() { 
-echo "-----------------------------------------------------------"
+    echo "-----------------------------------------------------------"
 }
 
 # Get a build number from TravisCI
@@ -19,6 +20,8 @@ export MINOR=1
 export APP_VERSION=$MAJOR.$MINOR.$OCTO_BUILD
 
 prntdash
+echo "Major: $MAJOR"
+echo "Minor: $MINOR"
 echo "Build Number: $OCTO_BUILD"
 
 # Create/Clean up folder
