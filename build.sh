@@ -1,12 +1,6 @@
 #!/bin/bash
 set -e
 
-py.test
-
-prntdash() { 
-    echo "-----------------------------------------------------------"
-}
-
 # Get a build number from TravisCI
 if [ "$TRAVIS_BUILD_NUMBER" = "" ]
 then
@@ -21,7 +15,7 @@ export MAJOR=0
 export MINOR=1
 export APP_VERSION=$MAJOR.$MINOR.$OCTO_BUILD
 
-prntdash
+echo "-----------------------------------------------------------"
 echo "Major: $MAJOR"
 echo "Minor: $MINOR"
 echo "Build Number: $OCTO_BUILD"
@@ -42,7 +36,7 @@ find tmp_build/octpopus_deploy_addon -name "*.pyc" -delete
 
 # Increment Build Number
 echo "Using version $APP_VERSION"
-prntdash
+echo "-----------------------------------------------------------"
 bumpversion \
     --current-version 0.0.0 \
     --new-version $APP_VERSION \
@@ -52,9 +46,18 @@ bumpversion \
 # Package the app
 cd tmp_build
 tar -czvf octopusdeploy-addon.tgz octpopus_deploy_addon
-
-# Run Splunk AppInspect
-splunk-appinspect inspect octopusdeploy-addon.tgz
-
 # Back to the root.
 cd ..
+
+echo
+echo "-----------------------------------------------------------"
+echo "Running PyTest"
+echo "-----------------------------------------------------------"
+py.test test/
+
+echo
+echo "-----------------------------------------------------------"
+echo "Running Splunk AppInspect"
+echo "-----------------------------------------------------------"
+splunk-appinspect inspect tmp_build/octopusdeploy-addon.tgz
+
