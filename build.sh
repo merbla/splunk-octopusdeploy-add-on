@@ -34,7 +34,7 @@ cp -r src/static tmp_build/octpopus_deploy_addon
 cp README.md tmp_build/octpopus_deploy_addon/README.md # README from repo
 
 # Set permissions on the app
-chmod -R 777 tmp_build/octpopus_deploy_addon/bin/octopus_deploy_client.py
+chmod -R 755 tmp_build/octpopus_deploy_addon/bin/octopus_deploy_client.py
 
 # Remove any Python Cache
 find tmp_build/octpopus_deploy_addon -name "*.pyc" -delete
