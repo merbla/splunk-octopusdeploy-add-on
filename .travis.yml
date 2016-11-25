@@ -1,15 +1,15 @@
 language: python
 sudo: false
 python:
-  - '2.7'
+- '2.7'
 before_install:
-  - wget --output-document splunk-appinspect.tar.gz http://dev.splunk.com/goto/appinspectdownload
-  - pip install splunk-appinspect.tar.gz
+- wget --output-document splunk-appinspect.tar.gz http://dev.splunk.com/goto/appinspectdownload
+- pip install splunk-appinspect.tar.gz
 install:
-  - pip install bumpversion
-  - pip install -r src/requirements.txt
+- pip install bumpversion
+- pip install -r src/requirements.txt
 script:
-  - "./build.sh"
+- "./build.sh"
 deploy:
   provider: releases
   skip_cleanup: true
@@ -18,3 +18,6 @@ deploy:
   file: tmp_build/octopusdeploy-addon.tgz
   on:
     tags: true
+notifications:
+  slack:
+    secure: Lm8BmZ5HV4hxXNOWhFQDkX3sRrdXfrF3/RZhOVhBUNyxNqjFImco1n1Ckkzdez8A8FsdMypdGh5ktbwleodzuCi1wEAi4dD8sU9rTQ3obX+bzzX4zuj3DE2teYEhcjTAXKZpyxNj2UCRHi3JCV4chdaCLeoPLrXrejsson8+85n5wZbrkXMfn+OGrLPISPDLNB8csxROU9fMXcJEVIkmwu5L2R/LfJhciQHAyeYoKamHBCIzOCT/A6IsdYo0/VjPUvnz8OoNL6kUhUeXBR7eD1oaUnAzi2Cd8zeXr/8UKLWJaGV/O68oYhYDCkzFy2Jc5i/OOMpPdVovPUTYuGWSId77FyF100XPpVtUtctwAumxC+jxS36pmFxakfSK4twRLHsoEjmok+aav4MyhbYBXQCHMq09jCbQNBK5FP6r29Oj17A5LKzT8CHe/yXVcW5v4XRQUR/EekT5m+wsjTL/c8owMSovY0Cqbe1O6LGec7rPyOWIP2GzDX8hiPcnyynVAmODIAEYGklfh6Deio8ggdT0sRxbVJSj7WKKE768MOqHBF2fNONG+Huur2SWhUuusbgn06w8LPSkO92uAkZOvZcxpRnq97hiJKjoC5IHqpp5WrKJcI+vXi2HqfqWJ5QCyCo///kHN3cY2MLpAkRaMKQOx3iIa87BP5jSG20yAz0=
