@@ -8,7 +8,6 @@ before_install:
 - pip install http://download.splunk.com/misc/packaging-toolkit/splunk-packaging-toolkit-1.0.0.tar.gz
 install:
 - pip install bumpversion
-- pip install -r src/requirements.txt
 script:
 - "./build.sh"
 deploy:
