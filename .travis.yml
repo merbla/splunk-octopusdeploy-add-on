@@ -8,7 +8,6 @@ before_install:
 - pip install http://download.splunk.com/misc/packaging-toolkit/splunk-packaging-toolkit-1.0.0.tar.gz
 install:
 - pip install bumpversion
-- pip install -r src/requirements.txt
 script:
 - "./build.sh"
 deploy:
@@ -16,7 +15,8 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: fSna/14/rgm5wZG91XXgKnEPH4c+F1hhNQ9ugCwYAfLNBlCGonOgu8hzCXg0VtaA1C1I13QVJOGBnvqd+rxmQTAdqBcHSLynmFcAlSkHmNFJBQwtGMyFn5pVc5nnPZdCEOHoo0U3gjuEUPx3mLbeS6l0Vsr0NXQHutC6X+wCE31Ke1vR/NZeZuHTYNcQkCNRsuaGXLu6VFYfZNEjVHbUCogBrCMjHybnFMnZ4cIdu0mF0jVSUluuCJdxsY57T1ijwQE9BajCUlXm/qkZPqivG4rRSdGp1h8xucfbyAuCEIcrc3geS90gWAXMU8l90cRJDw5w7SVmCxnS/DKjfRCtri3J2+wuMAHjig4JzriqpN43cXd1OLTDCPm0BMKEOklECpYbv3o8NofT9SBb46uo1kWBJxuxux1EEy27vASFPTs1w2Ea9sbZG53vHG/o783755VYKQfpnOYfkpUhiec6UKRegZRuqZanS9QtbNsq8/vULysD/dd6EQeSMEvfei29bV/1V6j3BV5n73IlMuXHZQ0+D4x8k+eN3kKKKby6J1O+0eODB6OUudZI35qG8QBvq6gcB3yo2ncgxRdTFj85MozCMQKeHDdVfwTUaUD4xMtqyC6u616QMlWivTtCGbcuD8VINMt/V9S9SxuR6HVtHrsGr8Rrjxl35DOjwmFeo5g=
-  file: tmp_build/octopusdeploy-addon.tgz
+  file_glob: true
+  file: package/*
   on:
     tags: true
 notifications:
