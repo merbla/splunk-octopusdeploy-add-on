@@ -31,6 +31,8 @@ mkdir -p tmp_build/octopus_deploy_addon
 cp -r src/octopus_deploy_addon tmp_build/ 
 cp README.md tmp_build/octopus_deploy_addon/README.md # README from repo 
 
+tree
+
 # Increment Build Number
 echo "Using version $APP_VERSION"
 echo "-----------------------------------------------------------"
