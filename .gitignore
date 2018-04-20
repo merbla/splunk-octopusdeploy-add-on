@@ -91,9 +91,13 @@ ENV/
 
 #Octo Build
 tmp_build/
+package/
+*.whl
+.venv/
 
 # Read the docs
 _build
 _static
 _templates
 
+splunk-appinspect.tar.gz

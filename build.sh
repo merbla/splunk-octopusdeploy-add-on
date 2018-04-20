@@ -22,51 +22,37 @@ echo "Build Number: $OCTO_BUILD"
 
 # Create/Clean up folder
 rm -rf tmp_build
+rm -rf package
 
 # Make new dir for Add On
-mkdir -p tmp_build/octpopus_deploy_addon
+mkdir -p tmp_build/octopus_deploy_addon
 
 # Copy folders and Assets
-cp -r src/bin tmp_build/octpopus_deploy_addon
-cp -r src/default tmp_build/octpopus_deploy_addon
-cp -r src/static tmp_build/octpopus_deploy_addon
-
-cp README.md tmp_build/octpopus_deploy_addon/README.md # README from repo
-
-# Set permissions on the app
-chmod -R 755 tmp_build/octpopus_deploy_addon/bin/octopus_deploy_client.py
-
-# Remove any Python Cache
-find tmp_build/octpopus_deploy_addon -name "*.pyc" -delete
-
-# Remove any hidden files 
-find tmp_build/octpopus_deploy_addon -name '._*' -type f -delete
-find tmp_build/octpopus_deploy_addon -name ".*" -exec rm -rf {} \;
+cp -r src/octopus_deploy_addon tmp_build/ 
+cp README.md tmp_build/octopus_deploy_addon/README.md # README from repo 
 
 # Increment Build Number
 echo "Using version $APP_VERSION"
 echo "-----------------------------------------------------------"
-bumpversion \
-    --current-version 0.0.1 \
-    --new-version $APP_VERSION \
-    tmp_build/octpopus_deploy_addon/default/app.conf \
-    --allow-dirty
+bumpversion --current-version 0.0.1 --new-version $APP_VERSION tmp_build --allow-dirty
+
+# Copy Pip dependencies
+pip download -r src/octopus_deploy_addon/requirements.txt -d tmp_build/octopus_deploy_addon/bin
 
 # Package the app
-cd tmp_build
-tar -czvf octopusdeploy-addon.tgz octpopus_deploy_addon
-# Back to the root.
-cd ..
+slim package tmp_build/octopus_deploy_addon -o package
 
 echo
 echo "-----------------------------------------------------------"
 echo "Running PyTest"
 echo "-----------------------------------------------------------"
-py.test test/
+pytest test/
 
 echo
 echo "-----------------------------------------------------------"
 echo "Running Splunk AppInspect"
 echo "-----------------------------------------------------------"
-splunk-appinspect inspect tmp_build/octopusdeploy-addon.tgz
-
+for file in package/*.tar.gz; 
+do
+  	splunk-appinspect inspect $file
+done
